@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Blog.Models.Extensions;
 
 namespace Blog.Controllers
 {
@@ -22,7 +23,7 @@ namespace Blog.Controllers
             using (var database = new BlogDbContext())
             {
                 var articles = database.Articles
-                    .Include(a => a.Author)
+                    .Include(a => a.Author).OrderByDescending(b => b.Id)
                     .ToList();
 
                 return View(articles);
@@ -76,14 +77,11 @@ namespace Blog.Controllers
                         .Id;
 
                     article.AuthorId = authorId;
-
                     database.Articles.Add(article);
                     database.SaveChanges();
-
                     return RedirectToAction("Index");
                 }
             }
-
             return View(article);
         }
     }
