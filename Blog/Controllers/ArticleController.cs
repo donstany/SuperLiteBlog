@@ -84,5 +84,37 @@ namespace Blog.Controllers
             }
             return View(article);
         }
+
+        // GET: /Movies/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            using (var db = new BlogDbContext())
+            {
+                var currArticle = db.Articles.Find(id);
+                if (currArticle == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(currArticle);
+            }
+        }
+
+        // POST: /Movies/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            using (var db = new BlogDbContext())
+            {
+                var currArticle = db.Articles.Find(id);
+                db.Articles.Remove(currArticle);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

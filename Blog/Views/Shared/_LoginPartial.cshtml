@@ -8,10 +8,10 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Create", "Create", "Article")
+            @Html.ActionLink(($"Hello {(User.Identity.GetUserFullName() != null ? User.Identity.GetUserFullName() : string.Empty)}!"), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserFullName() != null ? User.Identity.GetUserFullName(): string.Empty + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink("Create", "Create", "Article")
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>

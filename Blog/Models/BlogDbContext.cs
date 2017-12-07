@@ -16,5 +16,7 @@ namespace Blog.Models
         {
             return new BlogDbContext();
         }
+        //public System.Data.Entity.DbSet<Blog.Models.ApplicationUser> IdentityUsers { get; set; }
+        //public System.Data.Entity.DbSet<Blog.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
