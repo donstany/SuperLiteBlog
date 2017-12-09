@@ -12,7 +12,17 @@
                 <article>
                     <header>
                         <h2>
-                            @Html.ActionLink(@article.Title, "Details", "Article", new { @id = article.Id }, null)
+                            @if (User.Identity.IsAuthenticated && User.Identity.Name == article.Author.Email)
+                            {
+                                @Html.ActionLink(@article.Title, "Details", "Article", new { @id = article.Id }, null)
+
+                            }
+                            else
+                            {
+                                <strong>
+                                    @article.Title
+                                </strong>
+                            }
                         </h2>
                     </header>
                     <p>
